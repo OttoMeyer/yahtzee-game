@@ -1,3 +1,3 @@
-export function calculateSmallStraight(/* diceSet: Array<number> */) {
+export function calculateLargeStraight(/* diceSet: Array<number> */) {
   throw new Error('Not implemented');
 }
