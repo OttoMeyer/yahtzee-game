@@ -1,3 +1,3 @@
-export function calculateChance(/* diceSet: Array<number> */) {
-  throw new Error('Not implemented');
+export function calculateChance(diceSet: Array<number>) {
+  return diceSet.reduce((sum, value) => sum + value, 0);
 }
