@@ -1,3 +1,5 @@
-export function calculateFours(diceSet: Array<number>) {
-  return diceSet.reduce((sum, value) => (value === 4 ? sum + value : sum), 0);
+import { getSumOf } from './helpers/sums';
+
+export function calculateFours(diceSet: Array<number>): number {
+  return getSumOf(diceSet, 4);
 }

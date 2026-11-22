@@ -1,4 +1,4 @@
-export function getKindCount(diceSet: Array<number>) {
+export function getKindCount(diceSet: Array<number>): Array<number> {
   let cupySet = [...diceSet];
   const mask = [];
   while (cupySet.length !== 0) {
