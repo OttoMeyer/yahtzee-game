@@ -12,23 +12,24 @@ import { calculateSmallStraight } from './calculators/small-straight';
 import { calculateLargeStraight } from './calculators/large-straight';
 import { calculateYahtzee } from './calculators/yahtzee';
 
-export type Score = {
-  aces: number;
-  twos: number;
-  threes: number;
-  fours: number;
-  fives: number;
-  sixes: number;
-  chance: number;
-  threeOfKind: number;
-  fourOfKind: number;
-  fullHouse: number;
-  smallStraight: number;
-  largeStraight: number;
-  yahtzee: number;
+export type ScoreType = {
+  [key: string]: number | undefined;
+  aces?: number;
+  twos?: number;
+  threes?: number;
+  fours?: number;
+  fives?: number;
+  sixes?: number;
+  chance?: number;
+  threeOfKind?: number;
+  fourOfKind?: number;
+  fullHouse?: number;
+  smallStraight?: number;
+  largeStraight?: number;
+  yahtzee?: number;
 };
 
-export function getScore(diceSet: Array<number>): Score {
+export function getScore(diceSet: Array<number>): ScoreType {
   return {
     aces: calculateAces(diceSet),
     twos: calculateTwos(diceSet),
