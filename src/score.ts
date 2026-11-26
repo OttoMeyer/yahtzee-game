@@ -12,23 +12,57 @@ import { calculateSmallStraight } from './calculators/small-straight';
 import { calculateLargeStraight } from './calculators/large-straight';
 import { calculateYahtzee } from './calculators/yahtzee';
 
-export type Score = {
-  aces: number;
-  twos: number;
-  threes: number;
-  fours: number;
-  fives: number;
-  sixes: number;
-  chance: number;
-  threeOfKind: number;
-  fourOfKind: number;
-  fullHouse: number;
-  smallStraight: number;
-  largeStraight: number;
-  yahtzee: number;
+export type ScoreType = {
+  [key: string]: number | undefined;
+  aces?: number;
+  twos?: number;
+  threes?: number;
+  fours?: number;
+  fives?: number;
+  sixes?: number;
+  chance?: number;
+  threeOfKind?: number;
+  fourOfKind?: number;
+  fullHouse?: number;
+  smallStraight?: number;
+  largeStraight?: number;
+  yahtzee?: number;
 };
 
-export function getScore(diceSet: Array<number>): Score {
+export class ScoreTable {
+  [key: string]: number | null;
+  aces: number | null = null;
+  twos: number | null = null;
+  threes: number | null = null;
+  fours: number | null = null;
+  fives: number | null = null;
+  sixes: number | null = null;
+  chance: number | null = null;
+  threeOfKind: number | null = null;
+  fourOfKind: number | null = null;
+  fullHouse: number | null = null;
+  smallStraight: number | null = null;
+  largeStraight: number | null = null;
+  yahtzee: number | null = null;
+
+  constructor(score: ScoreType = {}) {
+    record(this, score);
+  }
+}
+
+export function record(table: ScoreTable, score: ScoreType = {}): void {
+  const keys = Object.keys(score);
+  keys.forEach((key) => {
+    if (score[key]) table[key] = score[key];
+  });
+}
+
+export function getUnfilled(table: ScoreTable): Array<string> {
+  const keys = Object.keys(table);
+  return keys.filter((key) => table[key] === null);
+}
+
+export function getScore(diceSet: Array<number>): ScoreType {
   return {
     aces: calculateAces(diceSet),
     twos: calculateTwos(diceSet),
