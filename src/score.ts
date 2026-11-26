@@ -79,3 +79,37 @@ export function getScore(diceSet: Array<number>): ScoreType {
     yahtzee: calculateYahtzee(diceSet),
   };
 }
+
+export function getUpperSum(table: ScoreTable): number {
+  const keys = ['aces', 'twos', 'threes', 'fours', 'fives', 'sixes'];
+  return keys.reduce((sum, key) => {
+    return table[key] ? sum + table[key] : sum;
+  }, 0);
+}
+
+export function getLowerSum(table: ScoreTable): number {
+  const keys = [
+    'chance',
+    'threeOfKind',
+    'fourOfKind',
+    'fullHouse',
+    'smallStraight',
+    'largeStraight',
+    'yahtzee',
+  ];
+  return keys.reduce((sum, key) => {
+    return table[key] ? sum + table[key] : sum;
+  }, 0);
+}
+
+export function getBonus(table: ScoreTable): number {
+  return getUpperSum(table) >= 63 ? 35 : 0;
+}
+
+export function getScoreSum(table: ScoreTable): number {
+  let sum = 0;
+  sum += getUpperSum(table);
+  sum += getBonus(table);
+  sum += getLowerSum(table);
+  return sum;
+}
